@@ -6,7 +6,7 @@ import os
 
 
 if (len(sys.argv)!=3):
-    print("\ncontacts2obsidian.py - by Jonathan Beckett\n\npython contacts2obsidian.py <source_file> <output_directory>\n\nExample : python google_contacts_to_obsidian.py contacts.csv c:\\my\\vault\\contacts\n\n")
+    print("\ngooglecontacts2obsidian.py - by Jonathan Beckett\n\npython googlecontacts2obsidian.py <source_file> <output_directory>\n\nExample : python googlecontacts2obsidian.py contacts.csv c:\\my\\vault\\contacts\n\n")
     sys.exit(0)
 
 source_file = sys.argv[1]
