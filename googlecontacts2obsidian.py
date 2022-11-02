@@ -6,7 +6,7 @@ import os
 
 
 if (len(sys.argv)!=3):
-    print("\ngooglecontacts2obsidian.py - by Jonathan Beckett\n\npython googlecontacts2obsidian.py <source_file> <output_directory>\n\nExample : python googlecontacts2obsidian.py contacts.csv c:\\my\\vault\\contacts\n\n")
+    print("\ngooglecontacts2obsidian.py - by Jonathan Beckett\n\npython googlecontacts2obsidian.py <source_file> <output_directory>\n\nExample : python googlecontacts2obsidian.py contacts.csv c:\\vault\\contacts\n\n")
     sys.exit(0)
 
 source_file = sys.argv[1]
@@ -38,8 +38,18 @@ with open(source_file,newline="") as csvfile:
         if (row["Phone 4 - Value"]):
             phones.append(row["Phone 4 - Value"].replace(" ::: ",","))
         
-        output_text = "---\nname: " + name + "\nemail: [" + ",".join(emails) + "]\nphone: [" + ",".join(phones) + "]\n---\n"
+        # output yaml
+        output_text = "---\n"
+        if name:
+            output_text += "name: " + name + "\n"
+        if len(emails):
+            output_text += "email: [" + ",".join(emails) + "]\n"
+        if len(phones):
+            output_text += "phone: [" + ",".join(phones) + "]\n"
+        output_text += "---\n"
         
+        # output the human readable formatted content
+
         if (row["Photo"]):
             output_text += "\n![" + row["Name"] + "](" + row["Photo"] + ")\n"
 
@@ -54,6 +64,7 @@ with open(source_file,newline="") as csvfile:
         if (row["Address 1 - Formatted"]):
             output_text += "\n### Address\n" + row["Address 1 - Formatted"] + "\n"
 
+        output_text += "\n#contact\n\n"
         
         
         output_file_path = os.path.join(output_path,name + ".md")
